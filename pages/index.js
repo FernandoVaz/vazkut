@@ -25,22 +25,42 @@ function ProfileSidebar(githubUser) {
 
 
 
-function ComunidadesPessoasSidebar(render, title) {
-
-  //console.log(render);
-  console.log(title);
+function ComunidadesPessoasSidebar(props) {
+  
+  //console.log(props);
   return (
     <>
-      <h2 className="smallTitle">{title.title} ({render.render.length}) </h2>
+      <h2 className="smallTitle">{props.title} ({props.list.length}) </h2>
 
       <ul>
-        {render.render.map((itemAtual) => { 
-          console.log(itemAtual);
+        {props.list.map((itemAtual) => {
             return (
               <li key={itemAtual.id}>
                 <a href={itemAtual.url} key={itemAtual.url}>
                   <img src={itemAtual.image}/>
                   <span>{itemAtual.title}</span>
+                </a>
+              </li>
+            )
+          })}
+      </ul>
+    </>
+  )
+}
+
+function SeguidoresComponent(props) {
+  
+  return (
+    <>
+      <h2 className="smallTitle">{props.title} ({props.list.length}) </h2>
+
+      <ul>
+        {props.list.map((itemAtual) => {
+            return (
+              <li key={itemAtual.id}>
+                <a href={itemAtual.html_url} >
+                  <img src={itemAtual.avatar_url}/>
+                  <span>{itemAtual.login}</span>
                 </a>
               </li>
             )
@@ -101,6 +121,23 @@ const pessoasFavoritas = [{
   image: 'https://github.com/felipefialho.png',
 }];
 
+const [seguidores, setSeguidores] = React.useState([]);
+
+React.useEffect(function() {
+  fetch('https://api.github.com/users/fernandovaz/followers')
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function(resCompleta) {
+      setSeguidores(resCompleta);
+    })
+}, [])
+  
+
+
+// 0 - pegar as arrays
+// 1 - Crair um box que vai ter um map, baseado nos item array que pegamos do github;
+// 
 
   return (
   <>
@@ -177,44 +214,20 @@ const pessoasFavoritas = [{
       </div>
       <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
         <ProfileRelationsBoxWrapper>
+        
+         <SeguidoresComponent list={seguidores} title='Seguidores'/>
+         
+        </ProfileRelationsBoxWrapper>
+        <ProfileRelationsBoxWrapper>
 
-         <ComunidadesPessoasSidebar render={comunidades} title='Comunidade' />
-         {/* <h2 className="smallTitle">Comunidades ({comunidades.length}) </h2>
-
-          <ul>
-            {comunidades.map((itemAtual) => { 
-              console.log(itemAtual);
-                return (
-                  <li key={itemAtual.id}>
-                    <a href={itemAtual.url} key={itemAtual.url}>
-                      <img src={itemAtual.image}/>
-                      <span>{itemAtual.title}</span>
-                    </a>
-                  </li>
-                )
-              })
-            }
-          </ul> */}
+         <ComunidadesPessoasSidebar list={comunidades} title='Comunidade'/>
+         
         </ProfileRelationsBoxWrapper>
         
         <ProfileRelationsBoxWrapper>
 
-          <ComunidadesPessoasSidebar render={pessoasFavoritas} title={'Pessoas da comunidade'} />
-          {/* <h2 className="smallTitle">Pessoas da comunidade ({pessoasFavoritas.length}) </h2>
-
-          <ul>
-            {pessoasFavoritas.map((itemPessoa) => { 
-                return (
-                  <li key={itemPessoa}>
-                    <a href={`/user/{itemPessoa}`} key={itemPessoa}>
-                      <img src={`https://github.com/${itemPessoa}.png`} />
-                      <span>{itemPessoa}</span>
-                    </a>
-                  </li>
-                )
-              })
-            }
-          </ul> */}
+          <ComunidadesPessoasSidebar list={pessoasFavoritas} title='Pessoas da comunidade' />
+    
         </ProfileRelationsBoxWrapper>
       </div>
     </MainGrid>

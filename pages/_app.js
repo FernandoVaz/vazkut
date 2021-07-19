@@ -11,7 +11,12 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: sans-serif;
+    background-image: url('https://newevolutiondesigns.com/images/freebies/galaxy-wallpaper-5.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: stretch;
     background-color: #000;
+    color: #fff;
   }
 
   #__next {

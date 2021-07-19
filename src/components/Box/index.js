@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 //Componentes sempre comecam com titulo maiusculo
 const Box = styled.div`
-  background: #ffffff;
-  border-radius: 8px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 0px;
 
   padding: 16px;
 
@@ -12,7 +12,7 @@ const Box = styled.div`
   margin-bottom: 10px;
   .boxLink {
     font-size: 14px;
-    color: #2E7BB4;
+    color: #fff;
     text-decoration: none;
     font-weight: 800;
   }
@@ -30,7 +30,7 @@ const Box = styled.div`
     margin-bottom: 20px;
     font-size: 16px;
     font-weight: 700;
-    color: #333333;
+    color: #ffffff;
     margin-bottom: 20px;
   }
   hr {
@@ -41,14 +41,14 @@ const Box = styled.div`
   }
   input {
     width: 100%;
-    background-color: #F4F4F4;
-    color: #333333;
+    background-color: rgba(0,0,0,0.9);
+    color: #ffffff;
     border: 0;
     padding: 14px 16px;
     margin-bottom: 14px;
-    border-radius: 10000px;
+    border-radius: 0px;
     ::placeholder {
-      color: #333333;
+      color: #ffffff;
       opacity: 1;
     }
   }
@@ -56,8 +56,8 @@ const Box = styled.div`
     border: 0;
     padding: 8px 12px;
     color: #FFFFFF;
-    border-radius: 10000px;
-    background-color: #6F92BB;
+    border-radius: 0px;
+    background-color: rgba(0,0,0,0.9);
   }
 `;
 

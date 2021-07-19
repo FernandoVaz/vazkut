@@ -54,10 +54,10 @@ export function AlurakutMenu({ githubUser }) {
 }
 AlurakutMenu.Wrapper = styled.header`
   width: 100%;
-  background-color: #308BC5;
+  background-color: rgba(0,0,0,0.0);
 
   .alurakutMenuProfileSidebar {
-    background: white;
+    background: rgba(0,0,0,0.7);
     position: fixed;
     z-index: 100;
     padding: 46px;
@@ -96,7 +96,7 @@ AlurakutMenu.Wrapper = styled.header`
   }
 
   .container {
-    background-color: #308BC5;
+    background-color: rgba(0,0,0,0.7);
     padding: 7px 16px;
     max-width: 1110px;
     margin: auto;
@@ -131,7 +131,7 @@ AlurakutMenu.Wrapper = styled.header`
         text-decoration: none;
         &:after {
           content: " ";
-          background-color: #5292C1;
+          background-color: rgba(0,0,0,0.0);
           display: block;
           position: absolute;
           width: 1px;
@@ -145,13 +145,13 @@ AlurakutMenu.Wrapper = styled.header`
     }
     input {
       color: #ffffff;
-      background: #5579A1;
+      background: rgba(50,50,50,0.05);
       padding: 10px 42px;
       border: 0;
       background-image: url(${`${BASE_URL}/icons/search.svg`});
       background-position: 15px center;
       background-repeat: no-repeat;
-      border-radius: 1000px;
+      border-radius: 0px;
       font-size: 12px;
       ::placeholder {
         color: #ffffff;
@@ -161,9 +161,8 @@ AlurakutMenu.Wrapper = styled.header`
   }
 `;
 AlurakutMenu.Logo = styled.img`
-  background-color: #ffffff;
   padding: 9px 14px;
-  border-radius: 1000px;
+  border-radius: 0px;
   height: 34px;
 `;
 
@@ -171,7 +170,7 @@ function AlurakutMenuProfileSidebar({ githubUser }) {
   return (
     <div className="alurakutMenuProfileSidebar">
       <div>
-        <img src={`https://github.com/${githubUser}.png`} style={{ borderRadius: '8px' }} />
+        <img src={`https://github.com/${githubUser}.png`} style={{ borderRadius: '0px' }} />
         <hr />
         <p>
           <a className="boxLink" href={`/user/${githubUser}`}>
@@ -227,7 +226,7 @@ export function AlurakutProfileSidebarMenuDefault() {
 AlurakutProfileSidebarMenuDefault.Wrapper = styled.div`
   a {
     font-size: 12px;
-    color: #2E7BB4;
+    color: #fff;
     margin-bottom: 16px;
     display: flex;
     align-items: center;
@@ -295,7 +294,7 @@ OrkutNostalgicIconSet.List = styled.ul`
   flex-wrap: wrap;
   li {
     font-size: 12px;
-    color: #5A5A5A;
+    color: #ccc;
     display: grid;
     grid-template-areas:
       "title title"
@@ -337,7 +336,7 @@ const AlurakutLoginScreen = css`
     --textSecondaryColor: #FFFFFF;
     --textTertiaryColor: #5A5A5A;
     --textQuarternaryColor: #C5C6CA;
-    --commonRadius: 8px;
+    --commonRadius: 0px;
   }
 
 
@@ -472,7 +471,7 @@ export const AlurakutStyles = css`
   }
   *::-webkit-scrollbar-thumb {
     background: #888; 
-    border-radius: 10px;
+    border-radius: 0px;
   }
   *::-webkit-scrollbar-thumb:hover {
     background: #555; 
