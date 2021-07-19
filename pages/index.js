@@ -24,20 +24,83 @@ function ProfileSidebar(githubUser) {
 }
 
 
+
+function ComunidadesPessoasSidebar(render, title) {
+
+  //console.log(render);
+  console.log(title);
+  return (
+    <>
+      <h2 className="smallTitle">{title.title} ({render.render.length}) </h2>
+
+      <ul>
+        {render.render.map((itemAtual) => { 
+          console.log(itemAtual);
+            return (
+              <li key={itemAtual.id}>
+                <a href={itemAtual.url} key={itemAtual.url}>
+                  <img src={itemAtual.image}/>
+                  <span>{itemAtual.title}</span>
+                </a>
+              </li>
+            )
+          })}
+      </ul>
+    </>
+  )
+}
+
+
 export default function Home() {
 const githubUser = 'FernandoVaz';
 const [comunidades, setComunidades] = React.useState([{
   id: '3213123125233128638712563871263126784',
   title: "Eu odeio acordar cedo",
-  image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
+  image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg',
+  url: 'https://www.google.com',
 }]);
 
 
 //const comunidades = React.useState(['Alurakut'])[0];
 //const setComuniddes = React.useState(['Alurakut'])[1];
 
+const pessoasFavoritas = [{
+  id: 11111,
+  title: 'juunegreiros',
+  url: 'https://github.com/juunegreiros',
+  image: 'https://github.com/juunegreiros.png',
+},
+{
+  id: 11112,
+  title: 'omariosouto',
+  url: 'https://github.com/omariosouto',
+  image: 'https://github.com/omariosouto.png',
+},
+{
+  id: 11113,
+  title: 'rafaballerini',
+  url: 'https://github.com/rafaballerini',
+  image: 'https://github.com/rafaballerini.png',
+},
+{
+  id: 11114,
+  title: 'FernanvoVaz',
+  url: 'https://github.com/fernandovaz',
+  image: 'https://github.com/fernandovaz.png',
+},
+{
+  id: 11115,
+  title: 'marcobrunodev',
+  url: 'https://github.com/marcobrunodev',
+  image: 'https://github.com/marcobrunodev.png',
+},
+{
+  id: 11116,
+  title: 'felipefialho',
+  url: 'https://github.com/felipefialho',
+  image: 'https://github.com/felipefialho.png',
+}];
 
-const pessoasFavoritas = ['juunegreiros', 'omariosouto', 'rafaballerini', 'FernandoVaz', 'marcobrunodev', 'felipefialho'];
 
   return (
   <>
@@ -67,6 +130,7 @@ const pessoasFavoritas = ['juunegreiros', 'omariosouto', 'rafaballerini', 'Ferna
               id: new Date().toISOString(),
               title: dadosDoFormulario.get('title'),
               image: dadosDoFormulario.get('imagem'),
+              url: dadosDoFormulario.get('url'),
             }
 
             if(dadoComunidade.title != "") {
@@ -94,6 +158,16 @@ const pessoasFavoritas = ['juunegreiros', 'omariosouto', 'rafaballerini', 'Ferna
               />
             </div>
 
+
+            <div>
+              <input 
+                placeholder="URL da comunidade externa" 
+                name="url" 
+                aria-label="" 
+                type="text"
+              />
+            </div>
+
             <button>
               Criar Comunidades
             </button>
@@ -104,13 +178,15 @@ const pessoasFavoritas = ['juunegreiros', 'omariosouto', 'rafaballerini', 'Ferna
       <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
         <ProfileRelationsBoxWrapper>
 
-         <h2 className="smallTitle">Comunidades ({comunidades.length}) </h2>
+         <ComunidadesPessoasSidebar render={comunidades} title='Comunidade' />
+         {/* <h2 className="smallTitle">Comunidades ({comunidades.length}) </h2>
 
           <ul>
             {comunidades.map((itemAtual) => { 
+              console.log(itemAtual);
                 return (
                   <li key={itemAtual.id}>
-                    <a href={`/user/{itemAtual.title}`} key={itemAtual.title}>
+                    <a href={itemAtual.url} key={itemAtual.url}>
                       <img src={itemAtual.image}/>
                       <span>{itemAtual.title}</span>
                     </a>
@@ -118,12 +194,13 @@ const pessoasFavoritas = ['juunegreiros', 'omariosouto', 'rafaballerini', 'Ferna
                 )
               })
             }
-          </ul>
+          </ul> */}
         </ProfileRelationsBoxWrapper>
         
         <ProfileRelationsBoxWrapper>
 
-          <h2 className="smallTitle">Pessoas da comunidade ({pessoasFavoritas.length}) </h2>
+          <ComunidadesPessoasSidebar render={pessoasFavoritas} title={'Pessoas da comunidade'} />
+          {/* <h2 className="smallTitle">Pessoas da comunidade ({pessoasFavoritas.length}) </h2>
 
           <ul>
             {pessoasFavoritas.map((itemPessoa) => { 
@@ -137,7 +214,7 @@ const pessoasFavoritas = ['juunegreiros', 'omariosouto', 'rafaballerini', 'Ferna
                 )
               })
             }
-          </ul>
+          </ul> */}
         </ProfileRelationsBoxWrapper>
       </div>
     </MainGrid>
