@@ -1,8 +1,8 @@
 import React from 'react';
 import MainGrid from '../src/components/MainGrid';
 import Box from '../src/components/Box';
-import { ProfileRelationsBoxWrapper} from '../src/components/ProfileRelations';
 import { AlurakutMenu, OrkutNostalgicIconSet, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons';
+import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
 
 function ProfileSidebar(githubUser) {
 
@@ -26,8 +26,7 @@ function ProfileSidebar(githubUser) {
 
 
 function ComunidadesPessoasSidebar(props) {
-  
-  //console.log(props);
+
   return (
     <>
       <h2 className="smallTitle">{props.title} ({props.list.length}) </h2>
@@ -73,12 +72,7 @@ function SeguidoresComponent(props) {
 
 export default function Home() {
 const githubUser = 'FernandoVaz';
-const [comunidades, setComunidades] = React.useState([{
-  id: '3213123125233128638712563871263126784',
-  title: "Eu odeio acordar cedo",
-  image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg',
-  url: 'https://www.google.com',
-}]);
+const [comunidades, setComunidades] = React.useState([]);
 
 
 //const comunidades = React.useState(['Alurakut'])[0];
@@ -124,6 +118,7 @@ const pessoasFavoritas = [{
 const [seguidores, setSeguidores] = React.useState([]);
 
 React.useEffect(function() {
+  // GET
   fetch('https://api.github.com/users/fernandovaz/followers')
     .then(function (res) {
       return res.json();
@@ -131,22 +126,50 @@ React.useEffect(function() {
     .then(function(resCompleta) {
       setSeguidores(resCompleta);
     })
-}, [])
-  
 
+
+    // fetch('/api/comunidades/', {
+    //   method: 'POST',
+
+    // })
+
+    // API GraphQL
+    fetch('https://graphql.datocms.com', {
+      method: 'POST',
+      headers: {
+        'Authorization':'e5bcad5809c1db118c4aa7e31a37ab',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        "query": ` {
+          allCommunities {
+            title 
+            id
+            image
+            creatorSlug
+          }
+        }
+      `})
+    })
+    .then((response) =>  response.json())
+    .then((respostaCompleta) => {
+      const comunidadesDoDato = respostaCompleta.data.allCommunities;
+      setComunidades(comunidadesDoDato);
+    })
+}, [])
 
 // 0 - pegar as arrays
 // 1 - Crair um box que vai ter um map, baseado nos item array que pegamos do github;
 // 
-
   return (
   <>
     <AlurakutMenu />
     <MainGrid>
-      <div className="profileArea" style={{gridArea: 'profileArea'}}>
-        <ProfileSidebar githubUser={githubUser}/>
+      <div className="profileArea" style={{ gridArea: 'profileArea' }}>
+        <ProfileSidebar githubUser={githubUser} />
       </div>
-      <div className="welcomeArea" style={{gridArea: 'welcomeArea'}}>
+      <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
         <Box>
           <h1 className="title">
             Bem vindo(a)
@@ -164,16 +187,29 @@ React.useEffect(function() {
 
 
             const dadoComunidade = {
-              id: new Date().toISOString(),
               title: dadosDoFormulario.get('title'),
               image: dadosDoFormulario.get('imagem'),
-              url: dadosDoFormulario.get('url'),
+              creatorSlug: githubUser,
             }
 
-            if(dadoComunidade.title != "") {
+            fetch('/api/comunidades', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(dadoComunidade)
+            }).then(async (response) => {
+              const dados = await response.json();
+              console.log(dados);
+              const comunidade = dados.registroCriado;
               const comunidadesAtualizadas = [...comunidades, dadoComunidade];
               setComunidades(comunidadesAtualizadas);
-            }
+            })
+
+            // if(dadoComunidade.title != "") {
+            //   const comunidadesAtualizadas = [...comunidades, dadoComunidade];
+            //   setComunidades(comunidadesAtualizadas);
+            // }
             
           }}> 
 
@@ -212,7 +248,7 @@ React.useEffect(function() {
           </form>
         </Box>
       </div>
-      <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
+      <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
         <ProfileRelationsBoxWrapper>
         
          <SeguidoresComponent list={seguidores} title='Seguidores'/>

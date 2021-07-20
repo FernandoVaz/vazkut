@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const MainGrid = styled.div`
+const MainGrid = styled.main`
   width: 100%;
   display: grid;
   margin-left: auto;
@@ -13,11 +13,16 @@ const MainGrid = styled.div`
       display: block;
     }
   }
+  .profileRelationsArea {
+      margin-top: 430px;
+      @media(min-width: 860px) {
+        margin-top: 0px;
+      }
+  }
   @media(min-width: 860px) {
     max-width: 1110px;
     display: grid;
-    grid-template-areas:
-     "profileArea welcomeArea profileRelationsArea";
+    grid-template-areas: "profileArea welcomeArea profileRelationsArea";
     grid-template-columns: 160px 1fr 312px; 
   }
 `;

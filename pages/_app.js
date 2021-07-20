@@ -24,11 +24,11 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     flex-direction: column;
   }
-
+  
   img {
-      max-width: 100%;
-      height: auto;
-      display: block;
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
 
   ${AlurakutStyles}

@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-
 //Componentes sempre comecam com titulo maiusculo
 const Box = styled.div`
-  background: rgba(0,0,0,0.6);
-  border-radius: 0px;
+  background: rgba(0,0,0,0.8);
+  border-radius: 8px;
 
   padding: 16px;
 
@@ -12,7 +11,7 @@ const Box = styled.div`
   margin-bottom: 10px;
   .boxLink {
     font-size: 14px;
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
     font-weight: 800;
   }
@@ -41,7 +40,7 @@ const Box = styled.div`
   }
   input {
     width: 100%;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0,0,0,0.0);
     color: #ffffff;
     border: 0;
     padding: 14px 16px;
@@ -56,10 +55,9 @@ const Box = styled.div`
     border: 0;
     padding: 8px 12px;
     color: #FFFFFF;
-    border-radius: 0px;
-    background-color: rgba(0,0,0,0.9);
+    border-radius: 10000px;
+    background-color: #6F92BB;
   }
-`;
-
+`; 
 
 export default Box;
