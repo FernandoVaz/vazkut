@@ -1,10 +1,11 @@
 import { SiteClient } from 'datocms-client';
+import TOKEN from '../../configFiles/TOKEN';
 
 export default async function recebedorDeRequests(request, response) {
 
     if(request.method === 'POST') {
 
-        const TOKEN = '3b3ecb825b6c386fc32e346018f036';
+        <TOKEN />
         const client = new SiteClient(TOKEN);
         
         //TODO: Criar DTO e validar os dados

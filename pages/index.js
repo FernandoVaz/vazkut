@@ -188,9 +188,11 @@ React.useEffect(function() {
 
             const dadoComunidade = {
               title: dadosDoFormulario.get('title'),
-              image: dadosDoFormulario.get('imagem'),
+              image: dadosDoFormulario.get('image'),
               creatorSlug: githubUser,
             }
+
+            //console.log(dadoComunidade);
 
             fetch('/api/comunidades', {
               method: 'POST',
@@ -205,12 +207,6 @@ React.useEffect(function() {
               const comunidadesAtualizadas = [...comunidades, dadoComunidade];
               setComunidades(comunidadesAtualizadas);
             })
-
-            // if(dadoComunidade.title != "") {
-            //   const comunidadesAtualizadas = [...comunidades, dadoComunidade];
-            //   setComunidades(comunidadesAtualizadas);
-            // }
-            
           }}> 
 
             <div>
