@@ -7,15 +7,10 @@ export default async function recebedorDeRequests(request, response) {
 
         <TOKEN />
         const client = new SiteClient(TOKEN);
-        
-        //TODO: Criar DTO e validar os dados
 
         const registroCriado = await client.items.create({
             itemType: "980444", // ID DO model da communities
             ...request.body,
-            // title: "Comunidade de teste",
-            // image: "https://github.com/omariosouto.png",
-            // creatorSlug: "Fernando Vaz",
         })
 
         console.log(registroCriado);
